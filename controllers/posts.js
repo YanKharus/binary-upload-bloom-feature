@@ -4,7 +4,9 @@ const Post = require("../models/Post");
 module.exports = {
   getProfile: async (req, res) => {
     try {
+      console.log(req.body)
       const posts = await Post.find({ user: req.user.id });
+      console.log(req.user.id, 'lalalalallallal', req.params)
       res.render("profile.ejs", { posts: posts, user: req.user });
     } catch (err) {
       console.log(err);
