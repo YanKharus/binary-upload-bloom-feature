@@ -14,7 +14,7 @@ module.exports = {
         const userPosts = await Post.find({ user: req.params.id})
         res.render("userProfile.ejs", { posts: userPosts, user: req.params.id });  // anywhere I am writing user I am implying not logged in user
       }
-      
+        
     } catch (err) {
       console.log(err);
     }
