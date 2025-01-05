@@ -4,10 +4,17 @@ const Post = require("../models/Post");
 module.exports = {
   getProfile: async (req, res) => {
     try {
+      if (!req.params.id) req.params.id = req.user.id // default behaviour because of how my requests are setup with undefined being default
       console.log(req.body)
       const posts = await Post.find({ user: req.user.id });
       console.log(req.user.id, 'lalalalallallal', req.params)
-      res.render("profile.ejs", { posts: posts, user: req.user });
+      if ( req.params.id == req.user.id) {
+        res.render("profile.ejs", { posts: posts, user: req.user });
+      } else {
+        const userPosts = await Post.find({ user: req.params.id})
+        res.render("userProfile.ejs", { posts: userPosts, user: req.params.id });  // anywhere I am writing user I am implying not logged in user
+      }
+      
     } catch (err) {
       console.log(err);
     }
