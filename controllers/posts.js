@@ -1,5 +1,7 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const User = require("../models/User");
+const Comment = require("../models/Comment");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -12,9 +14,11 @@ module.exports = {
         res.render("profile.ejs", { posts: posts, user: req.user });
       } else {
         const userPosts = await Post.find({ user: req.params.id})
-        res.render("userProfile.ejs", { posts: userPosts, user: req.params.id });  // anywhere I am writing user I am implying not logged in user
+        const viewedUser = await User.find ({ _id: req.params.id})
+        console.log(viewedUser)
+        res.render("userProfile.ejs", { posts: userPosts, user: viewedUser });  // anywhere I am writing user I am implying not logged in user
       }
-        
+
     } catch (err) {
       console.log(err);
     }
@@ -42,6 +46,24 @@ module.exports = {
       const result = await cloudinary.uploader.upload(req.file.path);
 
       await Post.create({
+        title: req.body.title,
+        image: result.secure_url,
+        cloudinaryId: result.public_id,
+        caption: req.body.caption,
+        likes: 0,
+        user: req.user.id,
+      });
+      console.log("Post has been added!");
+      res.redirect("/profile");
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  createComment: async (req, res) => {
+    try {
+      
+
+      await Comment.create({
         title: req.body.title,
         image: result.secure_url,
         cloudinaryId: result.public_id,
