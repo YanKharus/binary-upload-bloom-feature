@@ -14,8 +14,8 @@ module.exports = {
         res.render("profile.ejs", { posts: posts, user: req.user });
       } else {
         const userPosts = await Post.find({ user: req.params.id})
-        const viewedUser = await User.find ({ _id: req.params.id})
-        console.log(viewedUser)
+        const viewedUser = await User.findOne ({ _id: req.params.id})
+        console.log(viewedUser, 'vieweduser')
         res.render("userProfile.ejs", { posts: userPosts, user: viewedUser });  // anywhere I am writing user I am implying not logged in user
       }
 
