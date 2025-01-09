@@ -35,7 +35,8 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const comments = await Comment.find({postId: req.params.id});
+      res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {
       console.log(err);
     }
@@ -54,25 +55,21 @@ module.exports = {
         user: req.user.id,
       });
       console.log("Post has been added!");
-      res.redirect("/profile");
+      res.redirect(`/${req.params.postId}`);  
     } catch (err) {
       console.log(err);
     }
   },
   createComment: async (req, res) => {
     try {
-      
-
       await Comment.create({
-        title: req.body.title,
-        image: result.secure_url,
-        cloudinaryId: result.public_id,
-        caption: req.body.caption,
+        comment: req.body.comment,
+        postId: req.params.postId,
         likes: 0,
-        user: req.user.id,
+        userId: req.user.id,
       });
-      console.log("Post has been added!");
-      res.redirect("/profile");
+      console.log("comment created");
+      res.redirect(`/post/${req.params.postId}`);
     } catch (err) {
       console.log(err);
     }

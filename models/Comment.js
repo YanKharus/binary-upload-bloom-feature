@@ -9,16 +9,17 @@ const CommentSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  user: {
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
+    required: true
   },
   createdAt: {
     type: Date,
     default: Date.now,
   },
-  post: {
-    type: Number,
+  postId: {
+    type: String,
     required: true
   }
 });

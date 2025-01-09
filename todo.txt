@@ -1,6 +1,6 @@
 make posts be able to be commented on will probably be simplish as well 
 
-I think it will have to sorted as its own collection linked to the post by the _id 
+I think it will have to sorted as its own collection linked to the post by the _id of post and by user
 it will display who made the comment and maybe the date, TBD 
 
 need to create a POST request in each post that will send the request through router then to controller as well as modify 

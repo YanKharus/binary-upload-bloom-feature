@@ -1,5 +1,5 @@
 <%- include('partials/header') -%>
-<div class="container">
+<div class="container derp">
   <div class="row justify-content-center mt-5">
     <div class="col-6">
       <h2><%= post.title %></h2>
@@ -33,14 +33,25 @@
       <a class="btn btn-primary" href="/profile/<%=post.user%>">poster profile</a>
     </div>
   </div>
-</div>
-
-<form
+  <form
           class="col-1"
-          action="/post/createComment/<%= post.id %>"  make this  apost 
+          action="/post/createComment/<%= post.id %>"  
           method="POST"
         >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
+        <input type="text" class="form-control" name="comment"> 
+       <button class="btn btn-primary fa-solid fa-check" type="submit"></button>
+           
+        
         </form>
+        <ul>
+        <%for(let i = 0; i < comments.length; i++) {%>
+          
+          <li><%=comments[i].comment%></li>
+          
+        <%}%>
+      </ul>
+</div>
+
+
 
 <%- include('partials/footer') -%>
