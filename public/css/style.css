@@ -64,6 +64,3 @@ table {
     .vh100 {
         min-height: 100vh;
     }
-    .col {
-        border: 1px solid black;
-    }
