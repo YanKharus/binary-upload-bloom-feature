@@ -1,7 +1,7 @@
 <%- include('partials/header') -%>
 <div class="container derp">
   <div class="row justify-content-center mt-5">
-    <div class="col-6">
+    <div class="col-12">
       <h2><%= post.title %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
@@ -24,32 +24,34 @@
         <%}%>
       </div>
     </div>
-    <div class="col-3 mt-5">
+    <div class="col-auto mt-5 caption">
       <p><%= post.caption %></p>
     </div>
-    <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
-      <a class="btn btn-primary" href="/profile/<%=post.user%>">poster profile</a>
-    </div>
+    <div class="w-100 d-none d-md-block"></div>
+
+      <a class="btn btn-primary col-6 mt-5" href="/profile/<%=post.user%>">poster profile</a>
   </div>
-  <form
-          class="col-1"
-          action="/post/createComment/<%= post.id %>"  
-          method="POST"
-        >
-        <input type="text" class="form-control" name="comment"> 
-       <button class="btn btn-primary fa-solid fa-check" type="submit"></button>
-           
-        
-        </form>
-        <ul>
-        <%for(let i = 0; i < comments.length; i++) {%>
+  <div class="row">
+    <form
+            class="col-12"
+            action="/post/createComment/<%= post.id %>"  
+            method="POST"
+          >
+          <input type="text" class="form-control" name="comment"> 
+        <button class="col-1 btn btn-primary fa-solid fa-check" type="submit"></button>
+            
           
-          <li><%=comments[i].comment%></li>
+      </form>
+          <ul class="mt-3">
           
-        <%}%>
-      </ul>
+          <%for(let i = 0; i < comments.length; i++) {%>
+            
+            <li class="col col-auto offset-1 comments"><%=`${namesToComments[comments[i].userId]}: ${comments[i].comment}`%></li>
+            <div class="w-100 d-none d-md-block"></div>
+            
+          <%}%>
+        </ul>
+    </div>
 </div>
 
 

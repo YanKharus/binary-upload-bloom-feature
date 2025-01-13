@@ -47,7 +47,7 @@ module.exports = {
         })// because it instantly returns a promise and accessing a promise.userName will give nothing but controlling
       )   // order of operations by putting parentheses around the database fetch lets it resolve before being accessed for data
       console.log(namesToComments, 'lallalalalal')
-      res.render("post.ejs", { post: post, user: req.user, comments: comments });
+      res.render("post.ejs", { post: post, user: req.user, comments: comments, namesToComments: namesToComments });
     } catch (err) {
       console.log(err); 
     }
