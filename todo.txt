@@ -1,15 +1,3 @@
-make posts be able to be commented on will probably be simplish as well 
-
-I think it will have to sorted as its own collection linked to the post by the _id of post and by user
-it will display who made the comment and maybe the date, TBD 
-
-need to create a POST request in each post that will send the request through router then to controller as well as modify 
-the post.ejs page to handle displaying comments and all the formatting 
-
-also how will comments be fetched am I going to create a new route file that whose fetches are linked directly to post.ejs GET?
-
-maybe I dont actually need to do that much, all I have to do is get an array of comments at the server side of GETTING a post 
-and just send that information along with the render command 
-so fetching them is easy I just need to reformat posts to be able to create them 
-
-what information is needed to be passed around, probably the post _id
+anything else you want to do should be decided by what you actually plan out from now on 
+in terms of this project, you can just make it pretty and make the elements line up and add the 
+comment names thing 

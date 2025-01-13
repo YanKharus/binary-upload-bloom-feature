@@ -35,10 +35,21 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      const comments = await Comment.find({postId: req.params.id});
+      const comments = await Comment.find({postId: req.params.id}); 
+      let namesToComments = {}
+      
+      await Promise.all(
+        comments.map(async z => {
+          if (!namesToComments[z.userId]) {
+    
+            namesToComments[z.userId] = (await User.findById(z.userId).lean()).userName // parentheses need to be around 
+          }                                                                             // await up till findbyid for it to work
+        })// because it instantly returns a promise and accessing a promise.userName will give nothing but controlling
+      )   // order of operations by putting parentheses around the database fetch lets it resolve before being accessed for data
+      console.log(namesToComments, 'lallalalalal')
       res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {
-      console.log(err);
+      console.log(err); 
     }
   },
   createPost: async (req, res) => {
